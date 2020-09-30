@@ -1,4 +1,8 @@
 # mybatis\u8FDE\u63A5\u6570\u636E\u5E93
 spring:
   datasource:
-    url:
+    url:  jdbc:mysql://127.0.0.1:3306/consturct?characterEncoding=utf8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
