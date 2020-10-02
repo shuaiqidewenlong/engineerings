@@ -1,86 +1,112 @@
-# X-admin
+# Light Year Admin Using Iframe 光年后台模板的iframe版本
 
-简介
-X-admin基于layui的轻量级前端后台管理框架，简单免费，兼容性好，面向所有层次的前后端程序。创立于2017年初，为了敏捷WEB应用开发和简化企业应用开发而诞生的。#X-admin从诞生以来一直秉承简洁实用的设计原则，在保持出色的性能和至简的代码的同时，也注重易用性。并且拥有众多的原创功能和特性，在社区团队的积极参与下，在易用性、扩展性和性能方面不断优化和改进，已经成长为国内最领先和最具影响力的WEB应用开发前端后台框架，众多的典型案例确保可以稳定用于商业以及门户级的开发。testadmin
+#### 演示网址
+[http://lyear.itshubao.com/iframe](http://lyear.itshubao.com/iframe)
 
-商业友好的开源协议
-X-admin遵循Apache2开源协议发布。Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再作为开源或商业软件发布。
+[猛戳这里去Light Year Admin项目](https://gitee.com/yinqi/Light-Year-Admin-Template)
 
-## (ps:喜欢记得点赞，开源免费，大家拿去用，如果过意不去就捐点款，我不介意的)
+[猛戳这里去Light Year Admin V4项目(基于bootstrap 4.4.1版本)](https://gitee.com/yinqi/Light-Year-Admin-Using-Iframe-v4)
 
-## 官网
+#### 文档说明
+文档里面对一些常见问题做出了说明，并且在使用过程中改动的示例。
 
-http://x.xuebingsi.com
+[点击查看文档说明](http://www.itshubao.com/doc-lyear/lyear.html)
 
-交流QQ群：519492808
+#### 其他插件整合示例
+有些插件可能你并不一定能用上，这里对其他很多的一些插件整合以示例的形式出现，自己选择需要的插件下载。
 
-## 2019-05-06更新
+[点击查看其他插件整合](https://gitee.com/yinqi/Light-Year-Example)
 
-修改静态表格展现问题，设置td 最小宽度为80px,table宽度溢出自动出现滚动。
-升级方式，下载复制最新的 xadmin.css 在table外盒子增加 两个类。
-修改如下：class增加"layui-table-body layui-table-main"
- ```
-<div class="layui-card-body layui-table-body layui-table-main">
-    <table class="layui-table layui-form">
-    </table>
-</div
-```
+#### 交流群
+703726776
 
-## 2019-04-26更新
+#### 介绍
+![light year admin](https://images.gitee.com/uploads/images/2019/0314/224956_3eb2a29a_82992.png "未命名-1.png")
 
-* 完善tab 打开的记忆功能，之后关闭后，之前写入的tab 还可以读取出来
-* 增加弹出层父窗口刷新功能 xadmin.father_reload()
-* 增加提交后 关闭弹出 层  xadmin.close();
-* 静态表格全选  案例在会员列表
-* 增加右侧记忆功能 
-* v2.2升级只需要覆盖 xadmin.js
+该项目是光年后台管理模板(Light Year Admin)的ifame版本。
 
-## 2019-04-13更新
+#### 说明
+项目在Light Year Admin的基础上整理修改而来，用到了开源项目[Bootstrap-Multitabs](https://gitee.com/edwinhuish/multi-tabs)来实现多标签页，稍微做了一些修改。在这感谢该开源项目的小伙伴。
 
-* 对2.1版本整个逻辑重新设计，增加不同的主题，在xadmin.css后面引入主题文件就可以，主题样式文件放在css目录，喜欢记得点赞
+- 相对于Light Year Admin的项目，去掉了暗黑和半透明的两个主题
+- 所有需要的链接加上`class="multitabs"`
+- 因为插件做了一些修改，在顶部的下拉菜单(dropdown-menu)中，不要把链接写在href里面，放到data-url里
+- 插件用到了HTML5的会话存储，因此在修改了init里的默认地址后，可以再浏览器控制台执行下sessionStorage.clear(); // cache配置为true时
+- 在iframe的页面中新建tab的使用方法，<code>&lt;a href=&quot;#!&quot; class=&quot;js-create-tab&quot; data-title=&quot;按钮&quot; data-url=&quot;lyear-buttons.html&quot;&gt;新建按钮&lt;/a&gt;</code>
 
-## 2019-03-30更新
-* 修改 x_admin_show 弹出窗口实现最大化，默认窗口非最大化，如果需要弹出窗口最大化，在最后一个参数传 true
+#### 特别感谢
+- Bootstrap(去掉了自带的字体图标)
+- JQuery
+- bootstrap-colorpicker
+- bootstrap-datepicker
+- bootstrap-datetimepicker
+- ion-rangeslider
+- jquery-confirm
+- jquery-tags-input
+- bootstrap-notify
+- Chart.js
+- chosen.jquery.js
+- perfect-scrollbar
+- Bootstrap-Multitabs
 
-修复x_admin_add_to_tab 函数bug，在多个页面切换过程的报错。
+#### 更新记录
+2020.08.*
+更改侧边栏导航绑定click事件的方式，增加子页面内打开标签页的示例，调整图库
 
-x_admin_show(title,url,w,h,full=false)
+2020.07.*
+修复ui_other.html在页面缩小时的bug，新增一些辅助类
 
-## 2019-03-19更新
-* 增加非菜单打开tab函数 x_admin_add_to_tab(title,url,is_refresh) titel为tab标题,url为打开页面地址,is_refresh 可选参数，重复点击是否刷新，默认为false不刷新,true为重复点击刷新页面
-用法:
-index.html 中直接 x_admin_add_to_tab('在tab打开','http://www.baidu.com',true)
-iframe页面中  用 parent.x_admin_add_to_tab('在tab打开','http://www.163.com',true)
-我的桌面有demo
+2020.06.19
+新增通用样式，调整复选框单选框换行后左侧空白问题，修复bootstrap-table.min.js文件，调整tags插件
 
-## 2019-03-07更新
-* 是否开启刷新记忆tab功能, 通过index 页面增加 var is_remember = false;不增加默认开启
+2020.06.14
+新增label样式，调整datepicker插件样式和使用，调整silders插件样式和皮肤，改td垂直居中
 
-## 2019-03-06更新
+2020.05.18
+老登录页面增加背景，新增三个登录页面
 
-* 增加tab双击关闭当前tab
-* 增加tab右键菜单，可实现 关闭当前/关闭其它/关闭全部
+2020.01.06
+css中去掉system-ui解决input-group双边框问题，改toolWidth值未固定值
 
-## 2019-02-28更新
+2019.12.29
+调整登录页面样式以及多图上传样式
 
-* 开发升级为2.1, 引入layui 2.4.5 
-* 增加 html 根标签增加 class="x-admin-sm" 可以实现整体方格字体的细化 原字体14px 变成12px 16px变为14px，对于有些需要显示更多信息的页面比较友好 去除x-admin-sm 恢复原来样式
-* 增加动态表格事例
-* 增加左侧点击刷新tab 可根据实际需要选择  在 sub-menu li 标签中加上属性 date-refresh="1" ,该链接点击会进行刷新
-* 增加弹出层函数 x_admin_father_reload() 该函数可以实现对父窗口的刷新
-* 刷新保留左侧展开 （利用cookie 保存点击过的 索引，刷新读取cookie对应的索引 进行展开左侧）
-* 增加404错误页面
-* tab记忆功能，刷新保留之前打开的tab （利用cookie 保存点击过的 索引，刷新读取cookie对应的索引 进行打开)
+2019.12.18
+修改右键菜单绑定方式
 
+2019.12.15
+增加内页打开tab的js方法
 
-## 2018-04-30更新
+2019.12.08
+修改cssbug，新增card-footer，新增通用绑定iframe打开tab的方法，增加图标的一些使用类
 
-* 登录页面加上动画效果
-* 首页欢迎页面也加动画效果
+2019.08.04
+修改样式bug
 
-## 2018-04-25更新
+2019.07.21
+修复tab高度bug，侧边栏改为小图标形式，tab关闭按钮改为右侧总是显示，点击tab标签侧边栏选中
 
-* 针对首页欢迎页面调整
-* 修改tab窗口首页为能关闭
-* 对角色增加页面重新设计
-* 增加图标字体对应的编码
+2019.07.02
+增加右键关闭其他操作，替换logo
+
+2019.06.27
+表格插件页面新增treegrid使用示例
+
+2019.06.26
+调整tabs高度，替换size()方法
+新增右键菜单刷新和关闭功能
+
+2019.05.13
+略微调整单选框和复选框的样式
+新增表格插件(bootstrap-table)简单示例页面
+
+2019.05.05
+修改Bootstrap-Multitabs插件js，新增缓存配置cache，默认为false，如果需要缓存，可以在index.min.js增加配置cache : true
+
+2019.04.24
+新增文档示例页面增加多图上传样式（只有样式），调整标签插件样式和js的默认提示
+新增步骤条样式和向导插件，修改消息方法（新增自定义消失时间），增加错误页面(404)，增加通知消息页面说明，调整设置页样式
+
+#### 截图
+![示例截图一](https://images.gitee.com/uploads/images/2019/0403/213459_1dd52161_82992.png "首页 - 光年(Light Year Admin)后台管理系统模板4.png")
+![示例截图二](https://images.gitee.com/uploads/images/2019/0403/213521_8939b9bc_82992.png "首页 - 光年(Light Year Admin)后台管理系统模板3.png")
