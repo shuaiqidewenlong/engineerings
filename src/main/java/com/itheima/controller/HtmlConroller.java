@@ -13,10 +13,14 @@ public class HtmlConroller {
 
     @RequestMapping("login")
     String login(){
-        return  "login";
+        return  "lyear_pages_login";
     }
     @RequestMapping("index")
     String index(){
         return  "index";
+    }
+    @RequestMapping("lyear_main")
+    String lyear_main(){
+        return  "lyear_main";
     }
 }
