@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create: 2020-10-02 13:29
  */
 @Controller
-public class ZwlHtmlConroller {
+public class ZwlHtmlController {
 
     @RequestMapping("login")
     String login(){
