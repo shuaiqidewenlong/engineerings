@@ -15,6 +15,7 @@ public class ZwlHtmlConroller {
     String login(){
         return  "lyear_pages_login";
     }
+
     @RequestMapping("index")
     String index(){
         return  "index";
@@ -27,5 +28,10 @@ public class ZwlHtmlConroller {
     @RequestMapping("lyear_ui_buttons")
     String lyear_ui_buttons(){
         return "lyear_ui_buttons";
+    }
+
+    @RequestMapping("lyear_pages_subcontract")
+    String lyear_pages_subcontract(){
+        return  "lyear_pages_subcontract";
     }
 }
