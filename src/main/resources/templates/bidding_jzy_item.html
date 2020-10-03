@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--    项目信息
+    -->
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    
+</head>
+<body>
+<div id="app">
+    <div style="margin-bottom: 20px;">
+        <el-button
+                size="small"
+                @click="addTab(editableTabsValue)"
+        >
+            add tab
+        </el-button>
+    </div>
+    <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+        <el-tab-pane
+                v-for="(item, index) in editableTabs"
+                :key="item.name"
+                :label="item.title"
+                :name="item.name"
+        >
+            {{item.content}}
+        </el-tab-pane>
+    </el-tabs>
+</div>
+
+</body>
+</html>
