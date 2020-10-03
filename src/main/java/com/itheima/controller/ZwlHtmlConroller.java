@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create: 2020-10-02 13:29
  */
 @Controller
-public class ZwlHtmlController {
+public class ZwlHtmlConroller {
 
     @RequestMapping("login")
     String login(){
         return  "lyear_pages_login";
     }
+
     @RequestMapping("index")
     String index(){
         return  "index";
@@ -27,5 +28,10 @@ public class ZwlHtmlController {
     @RequestMapping("lyear_ui_buttons")
     String lyear_ui_buttons(){
         return "lyear_ui_buttons";
+    }
+
+    @RequestMapping("lyear_pages_subcontract")
+    String lyear_pages_subcontract(){
+        return  "lyear_pages_subcontract";
     }
 }
