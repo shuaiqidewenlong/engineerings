@@ -3,13 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
+            <!--Vue-->
+    <!--组件样式-->
+    <link rel="stylesheet" type="text/css" href="lib-master/theme-chalk/index.css">
+    <!--vue js样式-->
+    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <!--组件js样式-->
+    <script src="lib-master/index.js" type="text/javascript" charset="utf-8"></script>
+    <!--数据访问-->
+    <script src="axios-master/dist/axios.min.js" type="text/javascript" charset="utf -8"></script>
 </head>
 <body>
 
 
+<div id="div1">
+            <h4 align="center">材料总计划</h4>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="计划编号(自动生成)">
+            <el-input v-model="formInline.user"></el-input>
+        </el-form-item>
+
+        <el-form-item label="计划名称">
+            <el-input v-model="formInline.user"></el-input>
+        </el-form-item>
+
+        <el-form-item label="填报人">
+            <el-input v-model="formInline.user"></el-input>
+        </el-form-item>
+
+    </el-form>
+
+</div>
 
 
-
+<script type="text/javascript">
+        new Vue({
+            el:'#div1',
+            data:{
+                formInline: {
+                    user: '',
+                    region: ''
+                }
+            },
+            methods:{
+                onSubmit() {
+                    console.log('submit!');
+                }
+            }
+        })
+</script>
 
 </body>
 </html>
