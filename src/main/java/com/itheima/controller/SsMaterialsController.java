@@ -9,6 +9,7 @@ public class SsMaterialsController {
     @GetMapping(value = "/SsFindAll")
     public String SsFindAll() {
 
+        System.out.println("123");
         return "heloo";
     }
 }
