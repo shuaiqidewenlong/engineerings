@@ -23,4 +23,9 @@ public class ZwlHtmlConroller {
     String lyear_main(){
         return  "lyear_main";
     }
+
+    @RequestMapping("lyear_ui_buttons")
+    String lyear_ui_buttons(){
+        return "lyear_ui_buttons";
+    }
 }
