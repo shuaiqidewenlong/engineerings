@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>立项查询</title>
+    <!--组件样式-->
+    <link rel="stylesheet" href="lib-master/theme-chalk/index.css">
+    <!--vue js样式-->
+    <script src="js/vue.js" type="text/javascript"></script>
+    <!--组件js样式-->
+    <script src="lib-master/index.js" type="text/javascript" charset="UTF-8"></script>
+    <!--数据访问-->
+    <script type="text/javascript" src="axios-master/dist/axios.min.js"></script>
+<!--    导出表格插件-->
+    <script type="text/javascript" src="js/xlsx.core.min.js"></script>
+</head>
+<body>
+        <div id="app">
+            <div>
+          项目名称：<el-input v-model="projectName" placeholder="请输入内容" style="width: 12%"></el-input>
+          项目类型：
+                <template>
+                    <el-select v-model="value" placeholder="请选择">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </template>
+          项目状态：
+                <template>
+                    <el-select v-model="value" placeholder="请选择">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </template><p/>
+                建设单位：<el-input v-model="input" placeholder="请输入内容" style="width: 12%"></el-input>
+                立项人：<el-input v-model="input" placeholder="请输入内容" style="width: 12%"></el-input>
+                跟踪人：<el-input v-model="input" placeholder="请输入内容" style="width: 12%"></el-input><p/>
+                审批状态：<template>
+                <el-select v-model="value" placeholder="请选择">
+                    <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+            </template>
+                开始时间：<el-input v-model="input" placeholder="请输入内容" style="width: 15%" type="date"></el-input>
+                结束时间：<el-input v-model="input" placeholder="请输入内容" style="width: 15%" type="date"></el-input>
+                <el-button type="primary"  icon="el-icon-search" @click="query()">查询</el-button>
+                <el-button type="success" @click="ConfirmExport()">导出EXCEL</el-button>
+                <el-button type="info" icon="el-icon-printer">打印</el-button>
+            </div>
+            <template>
+                <el-table
+                        @row-click="openDetails"
+                        :data="tableData"
+                        border
+                        style="width: 100%">
+                        <el-table-column
+                                fixed
+                                prop="id"
+                                label="项目编号"
+                                width="150">
+                        </el-table-column>
+
+                    <el-table-column
+                            prop="projectName"
+                            label="项目名称"
+                            width="240">
+
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectType"
+                            label="项目类型"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projceStatass.projectStatus"
+                            label="项目状态"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="creator"
+                            label="立项人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectTacker"
+                            label="项目跟踪人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="approveStatus"
+                            label="审批状态"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectTacker"
+                            label="项目跟踪人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="startDate"
+                            label="计划开始时间"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="endDate"
+                            label="计划结束时间"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectCost"
+                            label="工程造价"
+                            width="130">
+                    </el-table-column>
+                </el-table>
+
+
+                <!--导出表格数据-->
+                <el-table v-if="isShow"
+                        :data="tableDataExport"
+                        border
+                        style="width: 100%">
+                    <el-table-column
+                            fixed
+                            prop="id"
+                            label="项目编号"
+                            width="150">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectName"
+                            label="项目名称"
+                            width="240">
+
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectType"
+                            label="项目类型"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projceStatass.projectStatus"
+                            label="项目状态"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="creator"
+                            label="立项人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectTacker"
+                            label="项目跟踪人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="approveStatus"
+                            label="审批状态"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectTacker"
+                            label="项目跟踪人"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="startDate"
+                            label="计划开始时间"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="endDate"
+                            label="计划结束时间"
+                            width="130">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="projectCost"
+                            label="工程造价"
+                            width="130">
+                    </el-table-column>
+                </el-table>
+                <!--<el-pagination-->
+                <!--        background-->
+                <!--        layout="prev, pager, next"-->
+                <!--        :current-page="currentPage"-->
+                <!--        :page-size="pageSize"-->
+                <!--        :total="total"-->
+                <!--        :current-page.sync="currentPage"-->
+                <!--        @current-change="loadTableData()">-->
+                <!--</el-pagination>-->
+
+                <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[2, 3, 4, 5]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                </el-pagination>
+            </template>
+        </div>
+</body>
+    <script type="text/javascript">
+        new Vue({
+            el:'#app',
+            data:{
+                total:0,
+                tableData:[],
+                tableDataExport:[],
+                options:[],
+                input:'',
+                value:'',
+                currentPage:1,
+                pageSize:3,
+                projectName:'',
+                isShow: false
+            },
+            methods:{
+                handleSizeChange(val) {
+                    this.pageSize = val;
+                    this.loadTableData();
+                },
+                handleCurrentChange(val) {
+                    this.currentPage = val;
+                   this.loadTableData();
+                },
+
+
+                //隐藏起来的数据，导出表格
+                loadTableDatas(){
+                    var vm = this;
+                    axios.get('findAlls')
+                        .then(function (response) {
+                            // handle success
+                            // vm.tableData = response.data;
+                            vm.tableDataExport = response.data
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                        .then(function () {
+                            // always executed
+                        });
+                },
+
+                //展示在页面显示数据
+                loadTableData(){
+                    var vm = this;
+                    axios.post('findAll',{
+                        pageSize:vm.pageSize,
+                        currentPage:vm.currentPage,
+                        projectName:vm.projectName
+                    })
+                        .then(function (response) {
+                            // handle success
+                            // vm.tableData = response.data;
+                            vm.tableData = response.data.all;
+                            // console.log(response.data.total+"===") ;
+                            vm.total = response.data.total;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                        .then(function () {
+                            // always executed
+                        });
+                },
+                //查询
+                query(){
+                    this.loadTableData();
+                },
+
+                //确认导出表格的信息
+                ConfirmExport(){
+                    const vm = this;
+                    this.$confirm('此操作将导出文件, 是否继续?', '提示', {
+                        confirmButtonText: '导出',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        // this.$message({
+                        //     type: 'success',
+                        //     message: '删除成功!'
+                        // });
+                        this.exportDate();
+                        // vm.$message({
+                        //     type: 'success',
+                        //     message: '导出成功!'
+                        // });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+                },
+
+                //导出表格
+                exportDate() {
+                    console.log("导出xls数据")
+                    var vm = this;
+                    var aoa = [];
+                    aoa.push(["项目编号","项目名称","项目类型","项目状态","立项人","项目跟踪人","审批状态","项目跟踪人","计划开始时间","计划结束时间","工程造价"]);
+                    vm.tableDataExport.forEach((item) => {
+                        aoa.push([item.id, item.projectName, item.projectType,item.projceStatass.projectStatus,item.creator,item.projectTacker,item.approveStatus,item.projectTacker,item.startDate,item.endDate,item.projectCost])
+                    });
+                    var sheet = XLSX.utils.aoa_to_sheet(aoa);
+                    this.openDownloadDialog(this.sheet2blob(sheet), "导出.xlsx")
+                },
+                sheet2blob(sheet, sheetName) {
+                    sheetName = sheetName || 'sheet1';
+                    var workbook = {
+                        SheetNames: [sheetName],
+                        Sheets: {}
+                    };
+                    workbook.Sheets[sheetName] = sheet;
+                    //生产excel的配置项
+                    var wopts = {
+                        bookType: 'xlsx',//要生成的文件类型
+                        bookSST: false,//是否生成Shared String Table,官方解释是，如果开启生成速度下降，但在低版本IOS设备上有更好的兼容性
+                        type: 'binary'
+                    };
+                    var wbout = XLSX.write(workbook, wopts);
+                    var blob = new Blob([s2ab(wbout)], {type: "application/octet-stream"})
+
+                    //字符串转ArrayBuffer
+                    function s2ab(s) {
+                        var buf = new ArrayBuffer(s.length);
+                        var view = new Uint8Array(buf);
+                        for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                        return buf;
+                    }
+
+                    return blob
+                },
+                openDownloadDialog(url, saveName) {
+                    if (typeof url == "object" && url instanceof Blob) {
+                        url = URL.createObjectURL(url)//创建blob地址
+                    }
+                    var aLink = document.createElement("a");
+                    aLink.href = url;
+                    aLink.download = saveName || "";
+                    var event;
+                    if (window.MouseEvent) event = new MouseEvent("click");
+                    else {
+                        event = document.createEvent("MouseEvents");
+                        event.initMouseEvent(
+                            "click",
+                            true,
+                            false,
+                            window,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            false,
+                            false,
+                            false,
+                            false,
+                            0,
+                            null
+                        );
+                    }
+                    aLink.dispatchEvent(event)
+                 },
+                // },
+                //弹框确认去详细页面
+                openDetails(row) {
+                    const vm = this;
+                    vm.$confirm('是否要查看《'+row.projectName+'》的详细信息', '信息', {
+                        distinguishCancelAndClose: true,
+                        confirmButtonText: '查看',
+                    })
+                        .then(() => {
+                            window.location.href="http://localhost:8080/project1?projectName="+row.projectName
+                        })
+                        .catch(action => {
+                            this.$message({
+                                type: 'info',
+                                message: action === 'cancel'
+                                    ? '已取消'
+                                    : '已取消'
+                            })
+                        });
+                },
+            },
+            created(){
+                this.loadTableDatas();
+                this.loadTableData();
+            }
+        })
+    </script>
+
+<style type="text/css">
+    .el-table td, .el-table th {
+        text-align: center !important;
+    }
+
+    .home-span {
+        float: right;
+    }
+</style>
+</html>
