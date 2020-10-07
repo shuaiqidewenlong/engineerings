@@ -64,6 +64,7 @@
                         @row-click="openDetails"
                         :data="tableData"
                         border
+                        v-loading="loading"
                         style="width: 100%">
                         <el-table-column
                                 fixed
@@ -243,7 +244,8 @@
                 currentPage:1,
                 pageSize:3,
                 projectName:'',
-                isShow: false
+                isShow: false,
+                loading:false
             },
             methods:{
                 handleSizeChange(val) {
@@ -288,6 +290,7 @@
                             vm.tableData = response.data.all;
                             // console.log(response.data.total+"===") ;
                             vm.total = response.data.total;
+                            vm.loading = false
                         })
                         .catch(function (error) {
                             // handle error
@@ -405,7 +408,7 @@
                         confirmButtonText: '查看',
                     })
                         .then(() => {
-                            window.location.href="http://localhost:8080/project1?projectName="+row.projectName
+                            window.location.href="http://localhost:8080/project?projectName="+row.projectName
                         })
                         .catch(action => {
                             this.$message({

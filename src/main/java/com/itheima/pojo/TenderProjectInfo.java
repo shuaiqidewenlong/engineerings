@@ -52,4 +52,7 @@ public class TenderProjectInfo {
     private String approvestatus;
     @TableField(value = "project_naturn")
     private String projectnaturn;
+
+
+
 }

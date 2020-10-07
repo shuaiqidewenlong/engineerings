@@ -95,4 +95,20 @@ public class ProjectInfo {
 
     //项目状态表
     private ProjceStatass projceStatass;
+
+    //招标采购计划表
+    private SsTenderPurchasePlan ssTenderPurchasePlan;
+
+    //招标报价对比表
+    private SsTenderOfferCompare ssTenderOfferCompare;
+
+
+    //招标报价对比明细表
+    private SsTendeCompareDetail ssTendeCompareDetail;
+
+    //材料基础库表
+    private MaterialInfo materialInfo;
+
+    //投标项目信息表
+    private SsTenderPurchaseDetail ssTenderPurchaseDetail;
 }

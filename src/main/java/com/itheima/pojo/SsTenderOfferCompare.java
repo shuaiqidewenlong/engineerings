@@ -31,7 +31,7 @@ public class SsTenderOfferCompare {
     private String attachIds;
     @Column(name = "flow_idss")
     //流程id
-    private int flowId;
+    private int flowIdss;
     @Column(name = "approve_statusss")
     //审批状态
     private String approveStatusss;

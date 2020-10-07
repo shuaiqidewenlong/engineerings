@@ -30,11 +30,5 @@ public class SsTenderPurchasePlan {
 
     private SsApsTpp ssApsTpp;
 
-    private SsTenderPurchasePlan ssTenderPurchasePlan;
 
-    private SsTenderOfferCompare ssTenderOfferCompare;
-
-    private SsTendeCompareDetail ssTendeCompareDetail;
-
-    private MaterialInfo materialInfo;
 }

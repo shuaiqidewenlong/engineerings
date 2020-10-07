@@ -21,15 +21,9 @@ public class SsProjectHtmlController {
     SsProjectService projectService;
 
     //项目详细详细页面
-    @GetMapping(value = "/project1")
+    @GetMapping(value = "/project")
     public String project(Map<String,Object> map,String projectName) {
         map.put("projectName",projectName);
-        return "project1";
-    }
-
-    @GetMapping(value = "/boot")
-    public String boot() {
-
-        return "project1";
+        return "project";
     }
 }
