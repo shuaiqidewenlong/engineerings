@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>文档列表 - 光年(Light Year Admin)后台管理系统模板</title>
+
+  <!-- vue样式开始 -->
+  <!--组件样式-->
+    <link rel="stylesheet" href="lib-master/theme-chalk/index.css">
+    <!--vue js样式-->
+    <script src="js/vue.js" type="text/javascript"></script>
+    <!--组件js样式-->
+    <script src="lib-master/index.js" type="text/javascript" charset="UTF-8"></script>
+    <!--数据访问-->
+    <script type="text/javascript" src="axios-master/dist/axios.min.js"></script>
+  <!-- vue样式结束 -->
+
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+<style type="text/css">
+        .table { background-color:#CCC; color:#666;}/*#CCC 就是细线颜色*/
+        .td { background-color:#fff}
+        .td-one{
+            background-color:rgb(241,249,254);
+        }
+</style>
+</head>
+  
+<body>
+<div class="container-fluid p-t-15">
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+            <div class="card-body">
+                <div id="app">
+                    <!--   表格开始    -->
+                    <div align="left">
+                        <h1>
+                            <i class="el-icon-back" @click="subcontract"></i>
+                        </h1>
+                    </div>
+                    <div align="center">
+                        <el-form ref="form" :model="form" label-width="80px">
+                        <table  border="1" cellspacing="1" cellpadding="2" width="1000px" style="text-align: center">
+                            <tr>
+                                <td colspan="4">
+                                    <h1>分包合同</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">合同编号(自动生成):</td>
+                                <td><el-input placeholder="请输入合同编号" readonly v-model="form.id" clearable ></el-input></td>
+                                <td class="td-one">合同名称：</td>
+                                <td><el-input placeholder="请输入合同名称" readonly v-model="form.contractname" clearable ></el-input></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">合同类型:</td>
+                                <td><el-input placeholder="请输入合同类型" readonly v-model="form.contracttype" clearable ></el-input></td>
+                                <td class="td-one">合同金额</td>
+                                <td><el-input placeholder="请输入合同金额" readonly v-model="form.contractamount" clearable ></el-input></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">结算方式：</td>
+                                <td><el-input placeholder="请输入结算方式" readonly v-model="form.settletype" clearable ></el-input></td>
+                                <td class="td-one">金额(大写):</td>
+                                <td><el-input placeholder="请输入金额(大写)" readonly v-model="form.amountupper" clearable ></el-input></td>
+                            </tr>
+                            <!--    第七行-->
+                            <tr>
+                                <td class="td-one">开始时间：</td>
+                                <td>
+                                    <el-date-picker
+                                        v-model="form.startdate"
+                                        type="date"
+                                        placeholder="开始时间">
+                                    </el-date-picker>
+                                </td>
+                                <td class="td-one">结束时间：</td>
+                                <td>
+                                    <el-date-picker
+                                            v-model="form.enddate"
+                                            type="date"
+                                            placeholder="结束日期">
+                                    </el-date-picker>
+                                </td>
+                            </tr>
+                            <!--   第八行 -->
+                            <tr>
+                                <td class="td-one">项目名称:</td>
+                                <td><el-input placeholder="请输入项目名称" readonly v-model="form.pname" clearable ></el-input></td>
+                                <td class="td-one">分包单位:</td>
+                                <td><el-input placeholder="请输入分包单位" readonly v-model="form.subcontractorsshall" clearable ></el-input></td>
+                            </tr>
+                            <!--   第九行 -->
+                            <tr>
+                                <td class="td-one">预付款:</td>
+                                <td><el-input placeholder="请输入预付款" readonly  v-model="form.advancepay" clearable></el-input></td>
+                                <td class="td-one">保证金</td>
+                                <td><el-input placeholder="请输入保证金" readonly v-model="form.depositamount" clearable></el-input></td>
+                            </tr>
+                            <!--    第十行-->
+                            <tr>
+                                <td class="td-one">付款方式:</td>
+                                <td><el-input placeholder="请输入付款方式" readonly v-model="form.paymenttype" clearable></el-input></td>
+                                <td class="td-one">签订人:</td>
+                                <td><el-input placeholder="请输入签订人" readonly v-model="form.contractsignatory" clearable></el-input></td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">日期:</td>
+                                <td>
+                                    <el-date-picker
+                                        v-model="form.createdate"
+                                        type="date"
+                                        placeholder="选择日期">
+                                    </el-date-picker>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="td-one" height="70px">合同附件:</td>
+                                <td colspan="3">
+                                    <el-input type="textarea" readonly v-model="form.attachids"></el-input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-one" height="70px">付款条件:</td>
+                                <td colspan="3">
+                                    <el-input type="textarea" readonly v-model="form.paycondition"></el-input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-one" height="70px">主要条款:</td>
+                                <td colspan="3">
+                                    <el-input type="textarea" readonly v-model="form.mainterm"></el-input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-one" height="70px">备注:</td>
+                                <td colspan="3">
+                                    <el-input type="textarea" readonly v-model="form.comment"></el-input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="td-one" height="70px">
+                                    <h3>
+                                        工程量清单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <el-button type="primary">
+                                            导出Excel<i class="el-icon-upload el-icon--right"></i>
+                                        </el-button>
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center">
+                                        <!--   工作量清单表格开始    -->
+                                    <template>
+                                            <el-table
+                                                    :data="SubcontractWorklistData"
+                                                    border
+                                                    style="width: 100%">
+                                                <el-table-column
+                                                        prop="id"
+                                                        label="序号"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="laborid"
+                                                        label="编号"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="workconten"
+                                                        label="施工内容"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="unit"
+                                                        label="单位"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="workcount"
+                                                        label="工程量"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="unitprice"
+                                                        label="综合单价"
+                                                        align="center">
+                                                </el-table-column>
+                                                <el-table-column
+                                                        prop="sumprice"
+                                                        label="合价"
+                                                        align="center">
+                                                </el-table-column>
+                                            </el-table>
+                                    </template>
+                                    <!--   工作量清单表格结束    -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-one">合计:</td>
+                                <td><el-input placeholder="请输入合计" v-model="form.contractamount" clearable></el-input></td>
+                                <td class="td-one">金额(大写):</td>
+                                <td><el-input placeholder="金额" v-model="form.amountupper" clearable></el-input></td>
+                            </tr>
+                        </table>
+                        </el-form>
+                    </div>
+                    <!--   表格结束    -->
+                </div>
+            </div>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+</script>
+</body>
+  <script type="text/javascript" src="js/zwlJs/processview.js"></script>
+</html>
