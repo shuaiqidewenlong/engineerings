@@ -3,7 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.dao.SsProjectMapper">
-    <select id="findAll" resultType="com.itheima.pojo.ProjectInfo">
-        select * from project_info
+    
+    <resultMap id="result_map" type="com.itheima.pojo.ProjectInfo">
+        <id property="id" column="id"></id>
+        <result property="projectName" column="project_name"></result>
+        <result property="projectAddress" column="project_address"></result>
+        <result property="projectTacker" column="project_tacker"></result>
+        <result property="startDate" column="start_plan_date"></result>
+        <result property="endDate" column="end_plan_date"></result>
+        <result property="projectPeriod" column="project_period"></result>
+        <result property="projectCost" column="project_cost"></result>
+        <result property="costUpper" column="cost_upper"></result>
+        <result property="espectProfit" column="espect_profit"></result>
+        <result property="projectType" column="project_type"></result>
+        <result property="qualityLevel" column="quality_level"></result>
+        <result property="projectStatus" column="project_status"></result>
+        <result property="flowId" column="flow_id"></result>
+        <result property="approveStatus" column="approve_status"></result>
+        <result property="buildCompany" column="build_company"></result>
+        <result property="contactor" column="contactor"></result>
+        <result property="contactPhone" column="contact_phone"></result>
+        <result property="contactAddress" column="contact_address"></result>
+        <result property="projectIntrduce" column="project_intrduce"></result>
+        <result property="comment" column="comment"></result>
+        <result property="creator" column="creator"></result>
+        <result property="attachIds" column="attach_ids"></result>
+        <result property="createDate" column="create_date"></result>
+        <association property="projceStatass" javaType="com.itheima.pojo.ProjceStatass">
+            <id property="id" column="ids"></id>
+            <result property="projectStatus" column="project_statuss"></result>
+        </association>
+    </resultMap>
+    
+    <select id="findAll" resultMap="result_map" parameterType="com.itheima.pojo.SsPageProject">
+        select * from project_info p inner join projce_statass ps on p.project_type = ps.ids
+        <where>
+            <if test="projectName !=null and projectName != ''">
+                project_name like concat('%',#{projectName},'%')
+            </if>
+        </where>
+        limit #{startPage},#{pageSize}
+    </select>
+    
+    <select id="findCount" resultType="long">
+         select count(*) from project_info p inner join projce_statass ps on p.project_type = ps.ids
+    </select>
+
+    <select id="findAllOne" resultMap="result_map">
+       select * from project_info p inner join projce_statass ps on p.project_type = ps.ids where project_name = #{value }
+    </select>
+
+
+    <select id="findAlls" resultMap="result_map">
+        select * from project_info p inner join projce_statass ps on p.project_type = ps.ids
     </select>
 </mapper>
