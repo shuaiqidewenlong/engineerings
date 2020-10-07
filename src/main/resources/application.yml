@@ -6,9 +6,8 @@ spring:
     username: root
     password: 1234
     type: com.mchange.v2.c3p0.ComboPooledDataSource
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 
-mybatis-plus:
-  type-aliases-package: com.itheima.pojo
-#logging:
-#  level:
-#    com.itheima.pojo: debug
+
+
