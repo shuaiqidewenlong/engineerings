@@ -21,6 +21,9 @@ var app=new Vue({
         projectnaturn:''
     },
     methods:{
+        item(){
+            window.location.href="http://localhost:8080/bidding_jzy_item"
+        },
         showtable(){
             var vm=this
             let tpid = document.getElementById("tpid").value;
