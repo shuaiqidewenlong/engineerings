@@ -12,4 +12,6 @@ public interface SsProjectService {
     public ProjectInfo findAllOne(String projectName);
 
     public List<ProjectInfo> findAlls();
+
+    public Map<String, Object> findAllBy(SsPageProject page);
 }

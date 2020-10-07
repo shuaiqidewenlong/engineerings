@@ -31,4 +31,9 @@ public interface SsProjectMapper {
 
     public List<ProjectInfo> findAlls();
 
+
+    public List<ProjectInfo> findAllBy(SsPageProject page);
+
+    public long findCountByName(String projectName);
+
 }

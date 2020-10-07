@@ -32,4 +32,10 @@ public class SsProjectController {
     public List<ProjectInfo> findAlls() {
         return ssProjectService.findAlls();
     }
+
+
+    @PostMapping(value = "/findAllBy")
+    public Map<String, Object> findAllBy(@RequestBody SsPageProject page) {
+        return ssProjectService.findAllBy(page);
+    }
 }

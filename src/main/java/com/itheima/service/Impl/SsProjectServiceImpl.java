@@ -39,4 +39,26 @@ public class SsProjectServiceImpl implements SsProjectService {
     public List<ProjectInfo> findAlls() {
         return projectDao.findAlls();
     }
+
+    @Override
+    public Map<String, Object> findAllBy(SsPageProject page) {
+
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        int startPage = (page.getCurrentPage()-1) * page.getPageSize();
+        page.setStartPage(startPage);
+        //查询数据
+        List<ProjectInfo> all = projectDao.findAllBy(page);
+
+        String projectName = page.getProjectName();
+
+        //查询条数
+        long countByName = projectDao.findCountByName(projectName);
+
+        map.put("all",all);
+        map.put("total",countByName);
+
+        return map;
+    }
+
+
 }

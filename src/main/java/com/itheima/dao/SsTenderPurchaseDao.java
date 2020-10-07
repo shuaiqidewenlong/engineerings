@@ -11,4 +11,6 @@ public interface SsTenderPurchaseDao {
     public List<SsTenderPurchasePlan> findsAll();
 
     public long findCount();
+
+
 }
