@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.TenderProjectInfoDao">
+    <select id="selectAll" parameterType="jzypage" resultType="tenderprojectinfo">
+        select * from tender_project_info tpi
+        inner join tender_project p
+        on tpi.project_type=p.project_type
+        <where>
+            <if test="projectname!=null and projectname!=''">
+                project_name like concat('%',#{projectname},'%')
+            </if>
+            <if test="buildcompany!=null and buildcompany!=''">
+               and build_company like concat('%',#{buildcompany},'%')
+            </if>
+            <if test="creator!=null and creator!=''">
+               and creator like concat('%',#{creator},'%')
+            </if>
+            <if test="bidder!=null and bidder!=''">
+                and bidder like concat('%',#{bidder},'%')
+            </if>
+            <if test="pretenderdate!=null and pretenderdate!=''">
+                and pretender_date>= #{pretenderdate}
+            </if>
+            <if test="enddate!=null and enddate!=''">
+                and #{enddate}>= pretender_date
+            </if>
+             <if test="projecttype!=null and projecttype!=''">
+                 p.project_type=#{projecttype}
+             </if>
+             <if test="approvestatus!=null and approvestatus!=''">
+                 approve_status=#{approvestatus}
+             </if>
+        </where>
+        limit #{state},#{pagesize}
+    </select>
+
+    <select id="selectByid" resultType="tenderprojectinfo" parameterType="int">
+         select * from tender_project_info tpi
+        inner join tender_project p
+        on tpi.project_type=p.project_type
+        where id=#{id}
+    </select>
+</mapper>

@@ -25,6 +25,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
@@ -91,6 +95,11 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -99,7 +108,28 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-        </plugins>
+
+        </plugins>　
+
+        <!--<resources>-->
+        <!--    <resource>-->
+        <!--        <directory>src/main/resources</directory>-->
+        <!--        <includes>-->
+        <!--            <include>**/*.properties</include>-->
+        <!--            <include>**/*.xml</include>-->
+        <!--        </includes>-->
+        <!--        <filtering>true</filtering>-->
+        <!--    </resource>-->
+        <!--    <resource>-->
+        <!--        <directory>src/main/java</directory>-->
+        <!--        <includes>-->
+        <!--            <include>**/*.properties</include>-->
+        <!--            <include>**/*.xml</include>-->
+        <!--        </includes>-->
+        <!--        <filtering>true</filtering>-->
+        <!--    </resource>-->
+        <!--</resources>-->
+
     </build>
 
 </project>

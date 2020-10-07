@@ -46,6 +46,6 @@ public class MySecurityConfigration extends WebSecurityConfigurerAdapter {
     //释放资源
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/css/**","/fonts/**","/images/**","/js/**","/lib/**");
+        web.ignoring().mvcMatchers("/css/**","/fonts/**","/images/**","/js/**","/lib/**","/axios-master/**");
     }
 }

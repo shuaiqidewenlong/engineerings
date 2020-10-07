@@ -3,13 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        .table { background-color:#CCC; color:#666;}/*#CCC 就是细线颜色*/
+        .td { background-color:#fff}
+        .td-one{
+            background-color:rgb(241,249,254);
+        }
+    </style>
+
+            <!--Vue-->
+    <!--组件样式-->
+    <link rel="stylesheet" type="text/css" href="lib-master/theme-chalk/index.css">
+    <!--vue js样式-->
+    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <!--组件js样式-->
+    <script src="lib-master/index.js" type="text/javascript" charset="utf-8"></script>
+    <!--数据访问-->
+    <script src="axios-master/dist/axios.min.js" type="text/javascript" charset="utf -8"></script>
 </head>
 <body>
 
 
+<div id="div1">
+
+    <!-------------------------------------   条件查询  开始 ------------------------------->
+    <el-form :inline="true" :model="tpi" class="demo-form-inline">
+        <el-form-item label="项目名称">
+            <el-input v-model="tpi.projectname" placeholder="项目名称"></el-input>
+        </el-form-item>
+        <el-form-item label="填报人">
+            <el-input v-model="tpi.buildcompany" placeholder="填报人"></el-input>
+        </el-form-item>
+        <el-form-item label="审批状态">
+            <el-select v-model="tpi.approvestatus" placeholder="查询原因">
+                <el-option label="完成" value="公积金提取复核"></el-option>
+                <el-option label="进行中" value="贷款审批"></el-option>
+                <el-option label="未完成" value="贷后管理"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item label="开始日期">
+            <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择开始日期" v-model="tpi.pretenderdate"></el-date-picker>
+            </el-col>
+        </el-form-item>
+
+        <el-form-item label="结束日期">
+            <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择结束日期" v-model="tpi.pretenderdate"></el-date-picker>
+            </el-col>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" >查询</el-button>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" >导出EXCEL</el-button>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" >打印</el-button>
+        </el-form-item>
+    </el-form>
+
+    <!-------------------------------------   条件查询  结束 ------------------------------->
+
+    <!-------------------------------------   材料总计划查  开始 ------------------------------->
+    <template>
+            <h3 align="center">材料总计划查询</h3>
+                <el-table
+                        :data="tableData"
+                        border
+                        style="width: 100%">
+                    <el-table-column
+                            prop="id"
+                            label="计划编号"
+                            >
+                    </el-table-column>
+                    <el-table-column
+                            prop="planname"
+                            label="计划名称"
+                            >
+                    </el-table-column>
+                    <el-table-column
+                            prop="applyer"
+                            label="填报人"
+                            width="130">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdate"
+                            label="日期">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pname"
+                            label="项目名称">
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="审批状态">
+                    </el-table-column>
+                </el-table>
+            </template>
+    <!-------------------------------------   材料总计划查  结束 ------------------------------->
 
 
+    <!-------------------------------------   分页  开始 ------------------------------->
 
+    <div class="block">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[3, 5, 7]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+        </el-pagination>
+    </div>
+
+    <!-------------------------------------   分页  结束 ------------------------------->
+
+
+</div>
+
+
+<script type="text/javascript">
+        new Vue({
+            el:'#div1',
+            data:{
+                tableData:[{}],
+                name:"",
+                tpi:{
+                    projectname:'',
+                    buildcompany:'',
+                    creator:'',
+                    bidder:'',
+                    projecttype:'',
+                    pretenderdate:'',
+                    enddate:'',
+                    approvestatus:''
+                },
+                //分页
+                //当前页
+                currentPage: 1,
+                //共多少页
+                total: 0,
+                //每页显示多少条
+                pageSize: 3,
+            },
+            methods:{
+                    //数据到表
+
+                LoadtableData(){
+                    var _this=this
+                        //分页的第一个参数
+                    var start=(this.currentPage-1)*this.pageSize
+
+
+                    axios.get('selectAll',{
+                        params:{
+                            'start':start,
+                            'pageSize':_this.pageSize
+                        }
+                    })
+                        .then(function (response) {
+                            _this.tableData=response.data.materialmasterplans
+                            _this.total=response.data.along
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+
+                handleSizeChange(val) {
+                    this.pageSize=val;
+                    this.LoadtableData();
+                    console.log(`每页 ${val} 条`);
+                },
+                handleCurrentChange(val) {
+                    this.currentPage=val;
+                    this.LoadtableData();
+                    console.log(`当前页: ${val}`);
+                }
+            },
+            created(){
+                this.LoadtableData();
+            }
+        })
+</script>
 
 </body>
 </html>
