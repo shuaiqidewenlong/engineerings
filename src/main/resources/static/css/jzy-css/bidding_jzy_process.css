@@ -1,0 +1,9 @@
+.table{
+    background-color:#CCC; color:#666;
+    margin: auto;
+}/*#CCC 就是细线颜色*/
+.td {
+    background-color:#fff}
+.td-one{
+    background-color:rgb(241,249,254);
+}
