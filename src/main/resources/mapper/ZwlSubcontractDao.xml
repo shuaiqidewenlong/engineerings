@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.ZwlSubcontractDao">
+    <select id="readSubcontractAll" parameterType="com.itheima.pojo.ZwlSubcontract" resultType="com.itheima.pojo.ZwlSubcontract">
+        select * from  labor_subcontract,project
+        where labor_subcontract.pid=project.pid
+        <if test="pname!='' and pname!=null">
+            and pname like concat('%',#{pname},'%')
+        </if>
+        <if test="contractname!='' and contractname!=null">
+            and contractname like concat('%',#{contractname},'%')
+        </if>
+        <if test="contractsignatory!='' and  contractsignatory!=null">
+            and contractsignatory like concat('%',#{contractsignatory},'%')
+        </if>
+        <if test="subcontractorsshall!='' and subcontractorsshall!=null">
+            and subcontractorsshall like concat('%',#{subcontractorsshall},'%')
+        </if>
+        <if test="approvestatus!='' and approvestatus!=null">
+            and approvestatus=#{approvestatus}
+        </if>
+        <if test="startdate1!='' and startdate1!=null and enddate1!=null and enddate1!=''">
+            and createdate between #{startdate1} and #{enddate1}
+        </if>
+        limit #{start},#{pageSize}
+    </select>
+</mapper>
