@@ -6,9 +6,7 @@ spring:
     username: root
     password: 1234
     type: com.mchange.v2.c3p0.ComboPooledDataSource
-mybatis-plus:
-  type-aliases-package: com.itheima.pojo
-
-
-
-
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
