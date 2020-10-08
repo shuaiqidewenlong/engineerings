@@ -65,6 +65,11 @@
 
 
     <select id="findCountByName" parameterType="String" resultType="long">
-        select count(*) from project_info p inner join projce_statass ps on p.project_type = ps.ids where project_name like concat('%',#{projectName},'%')
+        select count(*) from project_info p inner join projce_statass ps on p.project_type = ps.ids
+         <where>
+        <if test="projectName != null and project!= ''">
+            project_name like concat('%',#{projectName},'%')
+        </if>
+    </where>
     </select>
 </mapper>
