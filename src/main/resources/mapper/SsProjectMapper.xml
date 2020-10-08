@@ -30,7 +30,7 @@
         <result property="attachIds" column="attach_ids"></result>
         <result property="createDate" column="create_date"></result>
         <association property="projceStatass" javaType="com.itheima.pojo.ProjceStatass">
-            <id property="id" column="ids"></id>
+            <id property="ids" column="ids"></id>
             <result property="projectStatus" column="project_statuss"></result>
         </association>
     </resultMap>

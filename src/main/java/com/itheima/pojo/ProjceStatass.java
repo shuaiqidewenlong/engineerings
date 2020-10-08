@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Projce statass
+ */
 @TableName("projce_statass")
 @Data
 public class ProjceStatass {
@@ -15,7 +18,7 @@ public class ProjceStatass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //项目状态编号
-    private int id;
+    private int ids;
     @Column(name = "project_statuss")
     //项目状态
     private String projectStatus;
