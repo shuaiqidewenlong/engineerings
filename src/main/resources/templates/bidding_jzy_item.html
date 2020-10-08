@@ -24,12 +24,12 @@
                 <el-input v-model="tpi.projectname" placeholder="项目名称"></el-input>
             </el-form-item>
             <el-form-item label="项目类型" prop="region">
-                <el-select v-model="tpi.ptype.projecttype" placeholder="请选择项目类型">
+                <el-select v-model="tpi.ptype.ids" placeholder="请选择项目类型">
                     <el-option
                             v-for="item in ptype"
-                            :key="item.projecttype"
-                            :label="item.projectpname"
-                            :value="item.projecttype">
+                            :key="item.ids"
+                            :label="item.projectStatuss"
+                            :value="item.ids">
                     </el-option>
                 </el-select>
             </el-form-item>
@@ -89,7 +89,7 @@
                 </template>
             </el-table-column>
             <el-table-column
-                    prop="projectpname"
+                    prop="projectstatuss"
                     label="项目类型"
                     width="180">
             </el-table-column>

@@ -6,7 +6,7 @@ var app=new Vue({
         projectaddress:'',
         creator:'',
         pretenderdate:'',
-        projectpname:'',
+        projectstatuss:'',
         bidder:'',
         pretenderdate:'',
         pretenderfee:'',
@@ -39,7 +39,7 @@ var app=new Vue({
                     //项目地址
                     vm.projectaddress=response.data.projectaddress
                     //项目类型
-                    vm.projectpname=response.data.projectpname
+                    vm.projectstatuss=response.data.projectstatuss
                     //录入人
                     vm.creator=response.data.creator
                     //投标负责人

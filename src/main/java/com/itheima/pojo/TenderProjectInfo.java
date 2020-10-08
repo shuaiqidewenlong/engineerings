@@ -21,10 +21,9 @@ public class TenderProjectInfo {
     private String projectintrduce ;
     @TableField(value = "project_address")
     private String projectaddress;
-    @TableField(value = "project_type")
-    private int projecttype;
-    @TableField(value = "project_pname")
-    private String projectpname;
+    private int ids;
+    @TableField(value = "project_statuss")
+    private String projectstatuss;
     private String bidder;
     @TableField(value = "pretender_date")
     private String pretenderdate;

@@ -1,17 +1,18 @@
 package com.itheima.service;
 
-import com.itheima.dao.TenderProjectDao;
-import com.itheima.pojo.TenderProject;
+import com.itheima.dao.ProjectStatusDao;
+import com.itheima.pojo.ProjectStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TenderProjectService {
+public class ProjectStatusService {
     @Autowired
-    TenderProjectDao dao;
-    public List<TenderProject> selectAll(){
+    ProjectStatusDao dao;
+
+    public List<ProjectStatus> selectAll(){
         return dao.selectList(null);
     }
 }

@@ -22,7 +22,6 @@
 <input type="hidden" id="tpid" th:value="${tpid}">
 
 <div id="app" style="text-align:center" class="layui-form">
-    <el-button icon="el-icon-back" @click="item"></el-button>
     <table class="layui-table" style="text-align: center;margin: auto">
         <colgroup>
             <col width="16%">
@@ -31,7 +30,8 @@
         </colgroup>
         <tr>
             <td colspan="4" style="font-weight: 700" class="td-one">
-               <h3>投标项目信息表</h3>
+                <el-button icon="el-icon-back" @click="item" style="float: left"></el-button>
+                <h1>投标项目信息表&nbsp;&nbsp;&nbsp;&nbsp;</h1>
             </td>
         </tr>
         <!--第二行-->
@@ -69,7 +69,7 @@
         <!--    第七行-->
         <tr>
             <td class="td-one">项目类型：</td>
-            <td><el-input placeholder="项目类型" v-model="projectpname" clearable ></el-input></td>
+            <td><el-input placeholder="项目类型" v-model="projectstatuss" clearable ></el-input></td>
             <td class="td-one">投标负责人：</td>
             <td><el-input placeholder="投标负责人" v-model="bidder" clearable ></el-input></td>
         </tr>
