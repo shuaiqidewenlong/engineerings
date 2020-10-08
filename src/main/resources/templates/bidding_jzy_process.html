@@ -15,16 +15,24 @@
     <!--数据访问-->
     <script type="text/javascript" src="axios-master/dist/axios.min.js"></script>
     <link rel="stylesheet" href="css/jzy-css/bidding_jzy_process.css">
+    <link rel="stylesheet" href="css/layui.css">
+    <script type="text/javascript" src="js/layui.js"></script>
 </head>
 <body>
 <input type="hidden" id="tpid" th:value="${tpid}">
 
-<div id="app" style="text-align:center">
-    <div style="text-align: left"> <el-button icon="el-icon-back" @click="item"></el-button></div>
-    <table  border="1" cellspacing="1" cellpadding="2" width="1000px" style="text-align: center;margin: auto">
+<div id="app" style="text-align:center" class="layui-form">
+    <el-button icon="el-icon-back" @click="item"></el-button>
+    <table class="layui-table" style="text-align: center;margin: auto">
+        <colgroup>
+            <col width="16%">
+            <col width="34%">
+            <col>
+        </colgroup>
         <tr>
-
-            <td colspan="4" style="font-weight: 700" class="td-one"><h3>投标项目信息表</h3></td>
+            <td colspan="4" style="font-weight: 700" class="td-one">
+               <h3>投标项目信息表</h3>
+            </td>
         </tr>
         <!--第二行-->
         <tr>
