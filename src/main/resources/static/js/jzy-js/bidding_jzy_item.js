@@ -48,6 +48,8 @@ var app=new Vue({
                     _this.tpi.bidder=''
                     _this.tpi.pretenderdate=''
                     _this.tpi.enddate=''
+                    _this.tpi.approvestatus=''
+                    // _this.tpi.ptype.ids=''
 
                 })
                 .catch(function (error) {
@@ -175,6 +177,19 @@ var app=new Vue({
                 );
             }
             aLink.dispatchEvent(event)
+        },
+//打印数据
+        prints() {
+            var vm = this;
+            vm.isShow = true;
+            var divPrivat = document.getElementById("printTable");
+            var newstr = divPrivat.innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            window.location.reload();
+            document.body.innerHTML = oldstr;
+            return false;
         },
 
 

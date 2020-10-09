@@ -13,7 +13,7 @@
     <script src="lib-master/index.js" type="text/javascript" charset="UTF-8"></script>
     <!--数据访问-->
     <script type="text/javascript" src="axios-master/dist/axios.min.js"></script>
-<!--    导出表格-->
+    <!--    导出表格-->
     <script type="text/javascript" src="js/xlsx.core.min.js"></script>
 </head>
 <body>
@@ -25,6 +25,7 @@
             </el-form-item>
             <el-form-item label="项目类型" prop="region">
                 <el-select v-model="tpi.ptype.ids" placeholder="请选择项目类型">
+                    <el-option label="请选择项目类型" value=""></el-option>
                     <el-option
                             v-for="item in ptype"
                             :key="item.ids"
@@ -52,7 +53,8 @@
             </el-form-item>
             <el-form-item label="选择时间">
                 <el-col :span="11">
-                    <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择开始日期" v-model="tpi.pretenderdate"
+                    <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择开始日期"
+                                    v-model="tpi.pretenderdate"
                                     style="width: 100%;"></el-date-picker>
                 </el-col>
                 <el-col class="line" :span="2">-</el-col>
@@ -65,71 +67,73 @@
             <el-form-item>
                 <el-button type="primary" @click="showtable()">查询</el-button>
                 <el-button type="primary" @click="exportDate()">导出表格</el-button>
+                <el-button type="primary" @click="prints()">打印</el-button>
             </el-form-item>
         </el-form>
-
-        <el-table
-                @row-click="rowclick"
-                :data="tableData"
-                style="width: 100%"
-                :row-class-name="tableRowClassName"
-                v-loading="loading"
-                >
-            <el-table-column
-                    prop="id"
-                    label="项目编号"
-                    width="180"
+        <div id="printTable">
+            <el-table
+                    @row-click="rowclick"
+                    :data="tableData"
+                    style="width: 100%"
+                    :row-class-name="tableRowClassName"
+                    v-loading="loading"
             >
-            </el-table-column>
-            <el-table-column
-                    label="项目名称"
-                    width="180">
-                <template slot-scope="scope">
-                    <a href="#">{{scope.row.projectname }}</a>
-                </template>
-            </el-table-column>
-            <el-table-column
-                    prop="projectstatuss"
-                    label="项目类型"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="projectaddress"
-                    label="项目地址">
-            </el-table-column>
-            <el-table-column
-                    prop="creator"
-                    label="录入人">
-            </el-table-column>
-            <el-table-column
-                    prop="pretenderdate"
-                    label="预计时间">
-            </el-table-column>
-            <el-table-column
-                    prop="bidder"
-                    label="投标负责人">
-            </el-table-column>
-            <el-table-column
-                    prop="buildcompany"
-                    label="建设单位">
-            </el-table-column>
-            <el-table-column
-                    prop="pretenderamount"
-                    label="预计合同金额">
-            </el-table-column>
-            <el-table-column
-                    prop="contactor"
-                    label="联系人">
-            </el-table-column>
-            <el-table-column
-                    prop="contactphone"
-                    label="联系人电话">
-            </el-table-column>
-            <el-table-column
-                    prop="approvestatus"
-                    label="状态">
-            </el-table-column>
-        </el-table>
+                <el-table-column
+                        prop="id"
+                        label="项目编号"
+                        width="180"
+                >
+                </el-table-column>
+                <el-table-column
+                        label="项目名称"
+                        width="180">
+                    <template slot-scope="scope">
+                        <a href="#">{{scope.row.projectname }}</a>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="projectstatuss"
+                        label="项目类型"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="projectaddress"
+                        label="项目地址">
+                </el-table-column>
+                <el-table-column
+                        prop="creator"
+                        label="录入人">
+                </el-table-column>
+                <el-table-column
+                        prop="pretenderdate"
+                        label="预计时间">
+                </el-table-column>
+                <el-table-column
+                        prop="bidder"
+                        label="投标负责人">
+                </el-table-column>
+                <el-table-column
+                        prop="buildcompany"
+                        label="建设单位">
+                </el-table-column>
+                <el-table-column
+                        prop="pretenderamount"
+                        label="预计合同金额">
+                </el-table-column>
+                <el-table-column
+                        prop="contactor"
+                        label="联系人">
+                </el-table-column>
+                <el-table-column
+                        prop="contactphone"
+                        label="联系人电话">
+                </el-table-column>
+                <el-table-column
+                        prop="approvestatus"
+                        label="状态">
+                </el-table-column>
+            </el-table>
+        </div>
         <div class="block">
             <el-pagination
                     @size-change="handleSizeChange"
