@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.SsTenderPurchaseDao">
+
+    <resultMap id="result_map" type="com.itheima.pojo.ProjectInfo">
+        <id property="id" column="id"></id>
+        <result property="projectName" column="project_name"></result>
+        <result property="projectAddress" column="project_address"></result>
+        <result property="projectTacker" column="project_tacker"></result>
+        <result property="startDate" column="start_plan_date"></result>
+        <result property="endDate" column="end_plan_date"></result>
+        <result property="projectPeriod" column="project_period"></result>
+        <result property="projectCost" column="project_cost"></result>
+        <result property="costUpper" column="cost_upper"></result>
+        <result property="espectProfit" column="espect_profit"></result>
+        <result property="projectType" column="project_type"></result>
+        <result property="qualityLevel" column="quality_level"></result>
+        <result property="projectStatus" column="project_status"></result>
+        <result property="flowId" column="flow_id"></result>
+        <result property="approveStatus" column="approve_status"></result>
+        <result property="buildCompany" column="build_company"></result>
+        <result property="contactor" column="contactor"></result>
+        <result property="contactPhone" column="contact_phone"></result>
+        <result property="contactAddress" column="contact_address"></result>
+        <result property="projectIntrduce" column="project_intrduce"></result>
+        <result property="comment" column="comment"></result>
+        <result property="creator" column="creator"></result>
+        <result property="attachIds" column="attach_ids"></result>
+        <result property="createDate" column="create_date"></result>
+        <association property="ssTenderPurchasePlan" javaType="com.itheima.pojo.SsTenderPurchasePlan">
+                <id property="id" column="tppid"></id>
+                <result property="proId" column="pro_id"></result>
+                <result property="planEditor" column="plan_editor"></result>
+                <result property="tdate" column="tdate"></result>
+                <result property="comments" column="comments"></result>
+                <result property="approveStatuss" column="approve_statuss"></result>
+        </association>
+
+        <association property="ssTenderPurchaseDetail" javaType="com.itheima.pojo.SsTenderPurchaseDetail">
+                    <id property="idss" column="idss"></id>
+                    <result property="planId" column="plan_id"></result>
+                    <result property="mateId" column="math_id"></result>
+                    <result property="buyCount" column="buy_count"></result>
+                    <result property="useDept" column="use_dept"></result>
+                    <result property="buyTime" column="buy_time"></result>
+                    <result property="buyAdderss" column="buy_address"></result>
+                    <result property="providerName" column="provider_name"></result>
+        </association>
+
+        <association property="ssTenderOfferCompare" javaType="com.itheima.pojo.SsTenderOfferCompare">
+                    <id property="tcid" column="tcid"></id>
+                    <result property="proIdss" column="pro_idss"></result>
+                    <result property="tcdate" column="tcdate"></result>
+                    <result property="commentss" column="commentss"></result>
+                    <result property="attachIdss" column="attach_idss"></result>
+                    <result property="flowIdss" column="flow_idss"></result>
+                    <result property="approveStatusss" column="approve_statusss"></result>
+        </association>
+
+        <association property="ssTendeCompareDetail" javaType="com.itheima.pojo.SsTendeCompareDetail">
+            <id property="tcdid" column="tcdid"></id>
+            <result property="Cid" column="c_id"></result>
+            <result property="tenderContent" column="tender_content"></result>
+            <result property="unit" column="unit"></result>
+            <result property="workCount" column="work_count"></result>
+            <result property="BasePrice" column="base_price"></result>
+            <result property="tenderDate" column="tender_date"></result>
+            <result property="provider1" column="provider1"></result>
+            <result property="offerPrice1" column="offer_price1"></result>
+            <result property="provider2" column="provider2"></result>
+            <result property="offerPrice2" column="offer_price2"></result>
+            <result property="provider3" column="provider3"></result>
+            <result property="offerPrice3" column="offer_price3"></result>
+        </association>
+
+        <association property="materialInfo" javaType="com.itheima.pojo.MaterialInfo">
+            <id property="mid" column="mid"></id>
+            <result property="materialName" column="material_name"></result>
+            <result property="mateTypeId" column="mate_type_id"></result>
+            <result property="unit" column="unit"></result>
+            <result property="price" column="price"></result>
+            <result property="unitModel" column="unit_model"></result>
+            <result property="color" column="color"></result>
+            <result property="brand" column="brand"></result>
+            <result property="updateTime" column="update_time"></result>
+            <result property="updater" column="updater"></result>
+        </association>
+
+    </resultMap>
+    
+    <select id="findsAll" resultMap="result_map" parameterType="com.itheima.pojo.SsPuchasePlanPage">
+         select * from project_info pi
+            inner join tender_purchase_plan tpp  on  pi.id = tpp.pro_id
+
+            inner join tender_purchase_detail tpd on tpd.plan_id = tpp.tppid
+
+            inner join tender_offer_compare toc on pi.id = toc.pro_idss
+
+            inner join tende_compare_detail tcd on tpd.idss = tcd.c_id
+
+            inner join material_info ma on tcd.unit = ma .unit
+
+            limit #{startPage},#{pageSize}
+    </select>
+
+    <select id="findCount" resultType="long">
+        select count(*) from project_info pi
+            inner join tender_purchase_plan tpp  on  pi.id = tpp.pro_id
+
+            inner join tender_purchase_detail tpd on tpd.plan_id = tpp.tppid
+
+            inner join tender_offer_compare toc on pi.id = toc.pro_idss
+
+            inner join tende_compare_detail tcd on tpd.idss = tcd.c_id
+
+            inner join material_info ma on tcd.unit = ma .unit
+    </select>
+
+
+    <select id="findsAllByName" parameterType="com.itheima.pojo.SsPuchasePlanPage" resultMap="result_map">
+ select * from project_info pi
+            inner join tender_purchase_plan tpp  on  pi.id = tpp.pro_id
+
+            inner join tender_purchase_detail tpd on tpd.plan_id = tpp.tppid
+
+            inner join tender_offer_compare toc on pi.id = toc.pro_idss
+
+            inner join tende_compare_detail tcd on tpd.idss = tcd.c_id
+
+            inner join material_info ma on tcd.unit = ma .unit
+            <where>
+                <if test="projectName != null and projectName!= ''">
+                    project_name like concat('%',#{projectName},'%')
+                </if>
+            </where>
+
+            limit #{startPage},#{pageSize}
+
+    </select>
+
+
+    <select id="findsCount" resultType="long" parameterType="String">
+        select count(*) from project_info pi
+            inner join tender_purchase_plan tpp  on  pi.id = tpp.pro_id
+
+            inner join tender_purchase_detail tpd on tpd.plan_id = tpp.tppid
+
+            inner join tender_offer_compare toc on pi.id = toc.pro_idss
+
+            inner join tende_compare_detail tcd on tpd.idss = tcd.c_id
+
+            inner join material_info ma on tcd.unit = ma .unit
+        <where>
+            <if test="projectName != null and projectName!= ''">
+                project_name like concat('%',#{pname},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="finds" resultMap="result_map">
+        select * from project_info pi
+            inner join tender_purchase_plan tpp  on  pi.id = tpp.pro_id
+
+            inner join tender_purchase_detail tpd on tpd.plan_id = tpp.tppid
+
+            inner join tender_offer_compare toc on pi.id = toc.pro_idss
+
+            inner join tende_compare_detail tcd on tpd.idss = tcd.c_id
+
+            inner join material_info ma on tcd.unit = ma .unit
+    </select>
+</mapper>
