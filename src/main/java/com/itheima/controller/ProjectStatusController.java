@@ -1,7 +1,8 @@
 package com.itheima.controller;
 
-import com.itheima.pojo.TenderProject;
-import com.itheima.service.TenderProjectService;
+import com.itheima.pojo.ProjceStatass;
+import com.itheima.pojo.ProjectStatus;
+import com.itheima.service.ProjectStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("tp")
-public class TenderProjectController {
+public class ProjectStatusController {
     @Autowired
-    TenderProjectService service;
+    ProjectStatusService service;
     @GetMapping("selectAll")
-    public List<TenderProject> selectAll(){
+    public List<ProjectStatus> selectAll(){
         return service.selectAll();
     }
 }

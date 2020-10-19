@@ -10,7 +10,7 @@ public class JzyPage {
     private String buildcompany;
     private String creator;
     private String bidder;
-    private String projecttype;
+    private String ids;
     private String pretenderdate;
     private String enddate;
     private String approvestatus;

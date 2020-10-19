@@ -2,7 +2,6 @@ package com.itheima.service;
 
 import com.itheima.dao.TenderProjectInfoDao;
 import com.itheima.pojo.JzyPage;
-import com.itheima.pojo.TenderProject;
 import com.itheima.pojo.TenderProjectInfo;
 import com.itheima.util.MoneyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class TenderProjectInfoService {
     MoneyUtil moneyUtil;
 
     public Map<String,Object> selectAll(JzyPage page) {
-        Integer integer = dao.selectCount(null);
+        Integer integer = dao.selectCount(page);
         //System.out.println(integer);
         Map<String,Object> map= new HashMap<String, Object>();
         map.put("tender",dao.selectAll(page));

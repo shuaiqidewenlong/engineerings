@@ -31,7 +31,7 @@ var app=new Vue({
                     buildcompany:_this.tpi.buildcompany,
                     creator:_this.tpi.creator,
                     bidder:_this.tpi.bidder,
-                    projecttype:_this.tpi.ptype.projecttype,
+                    ids:_this.tpi.ptype.ids,
                     pretenderdate:_this.tpi.pretenderdate,
                     enddate:_this.tpi.enddate,
                     approvestatus:_this.tpi.approvestatus
@@ -48,6 +48,8 @@ var app=new Vue({
                     _this.tpi.bidder=''
                     _this.tpi.pretenderdate=''
                     _this.tpi.enddate=''
+                    _this.tpi.approvestatus=''
+                    // _this.tpi.ptype.ids=''
 
                 })
                 .catch(function (error) {
@@ -74,6 +76,7 @@ var app=new Vue({
         },
         rowclick(row, column, event){
             // alert(row)
+            console.log(row)
             this.$confirm('你是要查看'+row.projectname+'的流程吗？', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -113,7 +116,7 @@ var app=new Vue({
             var aoa = [];
             aoa.push(["项目编号","项目名称","项目地址","项目状态","录入人","预计时间","投标负责人","建设单位","预计合同金额","联系人","联系电话"]);
             vm.tableData.forEach((item) => {
-                aoa.push([item.id, item.projectname,item.projectaddress,item.projectpname,item.creator,item.pretenderdate,item.bidder,item.buildcompany,item.pretenderamount,item.contactor,item.contactphone])
+                aoa.push([item.id, item.projectname,item.projectaddress,item.projectstatuss,item.creator,item.pretenderdate,item.bidder,item.buildcompany,item.pretenderamount,item.contactor,item.contactphone])
             });
             var sheet = XLSX.utils.aoa_to_sheet(aoa);
             this.openDownloadDialog(this.sheet2blob(sheet), "导出.xlsx")
@@ -174,6 +177,19 @@ var app=new Vue({
                 );
             }
             aLink.dispatchEvent(event)
+        },
+//打印数据
+        prints() {
+            var vm = this;
+            vm.isShow = true;
+            var divPrivat = document.getElementById("printTable");
+            var newstr = divPrivat.innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            window.location.reload();
+            document.body.innerHTML = oldstr;
+            return false;
         },
 
 
